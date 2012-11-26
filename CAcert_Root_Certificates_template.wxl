@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-US" Codepage="1252" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+	<String Id="langid">1033</String>
+	<String Id="appName">CAcert Root Certificates</String>
+	<String Id="rootCertName">CAcert Root Certificate</String>
+	<String Id="class3CertName">CAcert Class 3 Subroot Certificate</String>
+	<String Id="downgradeErrorMessage">A newer version of [ProductName] is already installed.</String>
+	<String Id="trustCertsFeature">Mark Certificates as Trusted</String>
+</WixLocalization>

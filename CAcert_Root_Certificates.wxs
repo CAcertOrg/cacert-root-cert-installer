@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAcert Root Certificates Installer
+Copyright (C) 2012  CAcert Inc.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension" >
+	<Product Id="*" Name="!(loc.appName)" Language="1033" Version="1.0.0" Manufacturer="CAcert Inc." UpgradeCode="828E7EE8-B6A3-4930-9BB1-207111F9C84A">
+		<Package InstallerVersion="200" Compressed="yes" Languages="1033" Description="CAcert Root Certificates" Comments="Install the CAcert root certificates on your system and optionally mark them as trusted in all applications that use the Windows certificate store" Keywords="CAcert, root certificate, certificate store, SSL, X.509" Manufacturer="CAcert Inc." />
+		
+		<MajorUpgrade DowngradeErrorMessage="!(loc.downgradeErrorMessage)" />
+		<MediaTemplate EmbedCab="yes" />
+		
+		<Feature Id="CertFilesFeature" Title="!(loc.appName)" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER" Absent="disallow">
+			<ComponentRef Id="RootCert" />
+			<ComponentRef Id="Class3Cert"/>
+			<ComponentRef Id="GPGKey"/>
+			<ComponentRef Id="RDL"/>
+			
+			<Feature Id="TrustCertsFeature" Title="!(loc.trustCertsFeature)">
+				<ComponentGroupRef Id="TrustCerts" />
+			</Feature>
+		</Feature>
+		
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="APPLICATIONFOLDER" Name="CAcert Root Certificates">
+					
+					<Component Id="RootCert" Guid="6C086431-E9E0-4275-8D0F-29E0633DEF8A">
+						<File Id="RootCertFile" KeyPath="yes" Name="CAcert_Root.cer" ReadOnly="yes" Source="CAcert_Root.cer" />
+					</Component>
+					
+					<Component Id="Class3Cert" Guid="5CD85CD1-14D7-4768-8F35-7908C6331501">
+						<File Id="Class3CertFile" KeyPath="yes" Name="CAcert_Class3_Subroot.cer" ReadOnly="yes" Source="CAcert_Class3_Subroot.cer" />
+					</Component>
+					
+					<Component Id="GPGKey" Guid="3F77083D-AC90-43C3-8FC7-207FFB7B2B0D">
+						<File Id="GPGKeyFile" KeyPath="yes" Name="CAcert_GPG_Key.asc" ReadOnly="yes" Source="CAcert_GPG_Key.asc" />
+					</Component>
+					
+					<Component Id="RDL" Guid="72632002-B7F1-4DD5-AE3F-623C05C0E34F">
+						<File Id="RDLFile" KeyPath="yes" Name="CAcert_Root_Distribution_License.rtf" ReadOnly="yes" Source="CAcert_Root_Distribution_License.rtf" />
+					</Component>
+					
+				</Directory>
+			</Directory>
+		</Directory>
+		
+		<Binary Id="RootCertBin" SourceFile="CAcert_Root.cer" />
+		<Binary Id="Class3CertBin" SourceFile="CAcert_Class3_Subroot.cer" />
+		
+		<ComponentGroup Id="TrustCerts" Directory="APPLICATIONFOLDER">
+			<Component Id="TrustRootCertPerUser" Guid="1F1CF301-55A1-4686-AD68-3659541F5C60">
+				<iis:Certificate Id="TrustRootCertPerUser_Cert" Request="no" Name="!(loc.rootCertName)" BinaryKey="RootCertBin" StoreLocation="currentUser" StoreName="root" Overwrite="yes" />
+				<RegistryValue Id="TrustRootCertPerUser_RegVal" Root="HKCU" Key="Software\CAcert\Root Certificates" Name="RootCertImported" Type="string" Value="" KeyPath="yes" />
+				<Condition>ALLUSERS = ""</Condition>
+			</Component>
+			
+			<Component Id="TrustRootCertPerMachine" Guid="52B203D2-9133-48DD-A92C-3D27DBC7509D">
+				<iis:Certificate Id="TrustRootCertPerMachine_Cert" Request="no" Name="!(loc.rootCertName)" BinaryKey="RootCertBin" StoreLocation="localMachine" StoreName="root" Overwrite="yes" />
+				<RegistryValue Id="TrustRootCertPerMachine_RegVal" Root="HKLM" Key="Software\CAcert\Root Certificates" Name="RootCertImported" Type="string" Value="" KeyPath="yes" />
+				<Condition>ALLUSERS = 1</Condition>
+			</Component>
+			
+			<Component Id="TrustClass3CertPerUser" Guid="2E69DF7D-2C96-465C-8D05-80E91E0CFF8A">
+				<iis:Certificate Id="TrustClass3CertPerUser_Cert" Request="no" Name="!(loc.class3CertName)" BinaryKey="Class3CertBin" StoreLocation="currentUser" StoreName="ca" Overwrite="yes" />
+				<RegistryValue Id="TrustClass3CertPerUser_RegVal" Root="HKCU" Key="Software\CAcert\Root Certificates" Name="Class3CertImported" Type="string" Value="" KeyPath="yes" />
+				<Condition>ALLUSERS = ""</Condition>
+			</Component>
+			
+			<Component Id="TrustClass3CertPerMachine" Guid="BE98B7C7-6E45-4700-B64A-71608DA5A210">
+				<iis:Certificate Id="TrustClass3CertPerMachine_Cert" Request="no" Name="!(loc.class3CertName)" BinaryKey="Class3CertBin" StoreLocation="localMachine" StoreName="ca" Overwrite="yes" />
+				<RegistryValue Id="TrustClass3CertPerMachine_RegVal" Root="HKLM" Key="Software\CAcert\Root Certificates" Name="Class3CertImported" Type="string" Value="" KeyPath="yes" />
+				<Condition>ALLUSERS = 1</Condition>
+			</Component>
+		</ComponentGroup>
+		
+		
+		<WixVariable Id="WixUILicenseRtf" Value="CAcert_Root_Distribution_License.rtf" />
+		<WixVariable Id="WixUIBannerBmp" Value="CAcert-logo-colour_493x58.bmp"/>
+		<WixVariable Id="WixUIDialogBmp" Value="CAcert-logo-colour_493x312.bmp" />
+		
+		<UI Id="WixUI_Advanced_fixed">
+			<UIRef Id="WixUI_Advanced" />
+			
+			<Property Id="ALLUSERS" Value="2" />
+			<Property Id="MSIINSTALLPERUSER" Value="1" />
+			<Property Id="ApplicationFolderName" Value="CAcert Root Certificates" />
+			<Property Id="WixAppFolder" Value="WixPerUserFolder" />
+			
+			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetDefaultPerUserFolder" Order="4">1</Publish>
+			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetDefaultPerMachineFolder" Order="4">1</Publish>
+			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetPerUserFolder" Order="5">WixAppFolder = "WixPerUserFolder"</Publish>
+			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetPerMachineFolder" Order="5">WixAppFolder = "WixPerMachineFolder"</Publish>
+		</UI>
+		
+	</Product>
+	
+</Wix>

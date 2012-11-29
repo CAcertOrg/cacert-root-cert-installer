@@ -44,22 +44,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 				</xsl:if>
 			</xsl:if>
 			
-			<xsl:if test="xlf:file/xlf:body/xlf:group[@id='language-information']/xlf:trans-unit[@id='locale-id']/xlf:target">
-				<xsl:variable name="target" select="xlf:file/xlf:body/xlf:group[@id='language-information']/xlf:trans-unit[@id='locale-id']/xlf:target"/>
-				
-				<xsl:if test="$target/../@approved = 'yes' or
-				              $target/@state = 'translated' or
-				              $target/@state = 'signed-off' or
-				              $target/@state = 'final'">
-					<!--
-					Currently disabled because of a bug in WiX
-					see http://sourceforge.net/p/wix/bugs/3146/
-					
-					<xsl:attribute name="Language" select="$target"/>
-					-->
-				</xsl:if>
-			</xsl:if>
-			
 			<xsl:if test="xlf:file/xlf:body/xlf:group[@id='language-information']/xlf:trans-unit[@id='codepage']/xlf:target">
 				<xsl:variable name="target" select="xlf:file/xlf:body/xlf:group[@id='language-information']/xlf:trans-unit[@id='codepage']/xlf:target"/>
 				
@@ -68,6 +52,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 				              $target/@state = 'signed-off' or
 				              $target/@state = 'final'">
 					<xsl:attribute name="Codepage" select="$target"/>
+				</xsl:if>
+			</xsl:if>
+			
+			<xsl:if test="xlf:file/xlf:body/xlf:group[@id='language-information']/xlf:trans-unit[@id='locale-id']/xlf:target">
+				<xsl:variable name="target" select="xlf:file/xlf:body/xlf:group[@id='language-information']/xlf:trans-unit[@id='locale-id']/xlf:target"/>
+				
+				<xsl:if test="$target/../@approved = 'yes' or
+				              $target/@state = 'translated' or
+				              $target/@state = 'signed-off' or
+				              $target/@state = 'final'">
+					<!--
+					Currently disabled because of a bug in WiX that will be
+					fixed in version 3.7
+					see http://sourceforge.net/p/wix/bugs/3146/
+					
+					<xsl:attribute name="Language" select="$target"/>
+					-->
 				</xsl:if>
 			</xsl:if>
 			

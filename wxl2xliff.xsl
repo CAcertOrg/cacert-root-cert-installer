@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                xmlns:fn="http://www.w3.org/2005/xpath-functions"
                xmlns:wxl="http://schemas.microsoft.com/wix/2006/localization"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsixsi:schemaLocation="http://www.w3.org/1999/XSL/Transform http://www.w3.org/2007/schema-for-xslt20.xsd
+               xsi:schemaLocation="http://www.w3.org/1999/XSL/Transform http://www.w3.org/2007/schema-for-xslt20.xsd
                                       urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/cs02/xliff-core-1.2-strict.xsd">
 	
 	<xsl:strip-space elements="*"/>

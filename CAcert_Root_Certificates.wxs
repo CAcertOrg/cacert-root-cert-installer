@@ -24,13 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		<MajorUpgrade DowngradeErrorMessage="!(loc.downgradeErrorMessage)" Schedule="afterInstallExecute" />
 		<MediaTemplate EmbedCab="yes" />
 		
-		<Feature Id="CertFilesFeature" Title="!(loc.appName)" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER" Absent="disallow">
+		<Feature Id="CertFilesFeature" Title="!(loc.appName)" Description="!(loc.mainFeatureDescription)" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER" Absent="disallow">
 			<ComponentRef Id="RootCert" />
 			<ComponentRef Id="Class3Cert"/>
 			<ComponentRef Id="GPGKey"/>
 			<ComponentRef Id="RDL"/>
 			
-			<Feature Id="TrustCertsFeature" Title="!(loc.trustCertsFeature)">
+			<Feature Id="TrustCertsFeature" Title="!(loc.trustCertsFeature)" Description="!(loc.trustCertsFeatureDescription)">
 				<ComponentGroupRef Id="TrustCerts" />
 			</Feature>
 		</Feature>

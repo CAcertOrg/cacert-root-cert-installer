@@ -304,6 +304,7 @@ switch -regex ($command) {
 		build_installer
 		
 		Write-Output "Finished building the installer."
+		Write-Output "You can find it in .\build\template\"
 	}
 	
 	"installer" {

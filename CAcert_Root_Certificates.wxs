@@ -88,6 +88,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			</Component>
 		</ComponentGroup>
 		
+		<Icon Id="icon" SourceFile="CAcert-icon-48.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="icon" />
+		<Property Id="ARPCOMMENTS" Value="!(loc.addRemoveProgramsComments)" />
+		<Property Id="ARPCONTACT" Value="support@cacert.org" />
+		<Property Id="ARPHELPLINK" Value="mailto:support@cacert.org" />
+		<Property Id="ARPURLINFOABOUT" Value="https://www.cacert.org" />
 		
 		<WixVariable Id="WixUILicenseRtf" Value="CAcert_Root_Distribution_License.rtf" />
 		<WixVariable Id="WixUIBannerBmp" Value="CAcert-logo-colour_493x58.bmp"/>

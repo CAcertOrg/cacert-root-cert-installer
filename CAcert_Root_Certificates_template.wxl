@@ -6,4 +6,5 @@
 	<String Id="class3CertName">CAcert Class 3 Subroot Certificate</String>
 	<String Id="downgradeErrorMessage">A newer version of [ProductName] is already installed.</String>
 	<String Id="trustCertsFeature">Mark Certificates as Trusted</String>
+	<String Id="addRemoveProgramsComments">Root certificates of CAcert, a community-driven certificate authority.</String>
 </WixLocalization>

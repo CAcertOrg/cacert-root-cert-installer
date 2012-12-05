@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension" >
-	<Product Id="*" Name="!(loc.appName)" Language="1033" Version="1.0.0" Manufacturer="CAcert Inc." UpgradeCode="828E7EE8-B6A3-4930-9BB1-207111F9C84A">
-		<Package InstallerVersion="200" Compressed="yes" Languages="1033" Description="CAcert Root Certificates" Comments="Install the CAcert root certificates on your system and optionally mark them as trusted in all applications that use the Windows certificate store" Keywords="CAcert, root certificate, certificate store, SSL, X.509" Manufacturer="CAcert Inc." />
+	<Product Id="3D42DACC-2DA6-455F-94FC-A15BCEF695E4" Name="!(loc.appName)" Language="!(loc.langid)" Version="1.0.0" Manufacturer="CAcert Inc." UpgradeCode="828E7EE8-B6A3-4930-9BB1-207111F9C84A">
+		<Package InstallerVersion="200" Compressed="yes" Languages="!(loc.langid)" Description="CAcert Root Certificates" Comments="Install the CAcert root certificates on your system and optionally mark them as trusted in all applications that use the Windows certificate store" Keywords="CAcert, root certificate, certificate store, SSL, X.509" Manufacturer="CAcert Inc." />
 		
 		<MajorUpgrade DowngradeErrorMessage="!(loc.downgradeErrorMessage)" />
 		<MediaTemplate EmbedCab="yes" />

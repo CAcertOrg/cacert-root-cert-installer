@@ -23,21 +23,79 @@ param (
 	[string] $command  = "-help",
 	[array]  $cultures = @{
 "en-US"=""
+"bg-BG"="bg"
+"cs-CZ"="cs"
+"da-DK"="da"
 "de-DE"="de"
+"el-GR"="el"
+"es-ES"="es"
+"fi-FI"="fi"
 "fr-FR"="fr"
+"hu-HU"="hu"
+"it-IT"="it"
+"ja-JP"="ja"
+"lv-LV"="lv"
+"nl-NL"="nl"
+"pl-PL"="pl"
+"pt-BR"="pt_BR"
+"pt-PT"="pt_PT"
+"ru-RU"="ru"
+"sv-SE"="sv"
+"tr-TR"="tr"
+"zh-CN"="zh_CN"
+"zh-TW"="zh_TW"
 }.Keys
 )
 
 $base_name = "CAcert_Root_Certificates"
 $culture_map = @{
 "en-US"=""
+"bg-BG"="bg"
+"cs-CZ"="cs"
+"da-DK"="da"
 "de-DE"="de"
+"el-GR"="el"
+"es-ES"="es"
+"fi-FI"="fi"
 "fr-FR"="fr"
+"hu-HU"="hu"
+"it-IT"="it"
+"ja-JP"="ja"
+"lv-LV"="lv"
+"nl-NL"="nl"
+"pl-PL"="pl"
+"pt-BR"="pt_BR"
+"pt-PT"="pt_PT"
+"ru-RU"="ru"
+"sv-SE"="sv"
+"tr-TR"="tr"
+"zh-CN"="zh_CN"
+"zh-TW"="zh_TW"
 }
+
 $langid_map = @{
 "en-US"=1033
+"bg-BG"=1026
+"cs-CZ"=1029
+"da-DK"=1030
 "de-DE"=1031
+"el-GR"=1032
+"es-ES"=1034
+"fi-FI"=1035
 "fr-FR"=1036
+"hu-HU"=1038
+"it-IT"=1040
+"ja-JP"=1041
+"lv-LV"=1062
+"nl-NL"=1043
+"pl-PL"=1045
+"pt-BR"=1046
+"pt-PT"=2070
+"ru-RU"=1049
+"sv-SE"=1053
+"tr-TR"=1055
+"zh-CN"=2052
+"zh-TW"=1028
 }
 
 $wxs_file = ".\${base_name}.wxs"

@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	<Product Id="3D42DACC-2DA6-455F-94FC-A15BCEF695E4" Name="!(loc.appName)" Language="!(loc.langid)" Version="1.0.0" Manufacturer="CAcert Inc." UpgradeCode="828E7EE8-B6A3-4930-9BB1-207111F9C84A">
 		<Package InstallerVersion="200" Compressed="yes" Languages="!(loc.langid)" Description="CAcert Root Certificates" Comments="Install the CAcert root certificates on your system and optionally mark them as trusted in all applications that use the Windows certificate store" Keywords="CAcert, root certificate, certificate store, SSL, X.509" Manufacturer="CAcert Inc." />
 		
-		<MajorUpgrade DowngradeErrorMessage="!(loc.downgradeErrorMessage)" />
+		<MajorUpgrade DowngradeErrorMessage="!(loc.downgradeErrorMessage)" Schedule="afterInstallExecute" />
 		<MediaTemplate EmbedCab="yes" />
 		
 		<Feature Id="CertFilesFeature" Title="!(loc.appName)" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER" Absent="disallow">
@@ -105,6 +105,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetDefaultPerMachineFolder" Order="4">1</Publish>
 			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetPerUserFolder" Order="5">WixAppFolder = "WixPerUserFolder"</Publish>
 			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetPerMachineFolder" Order="5">WixAppFolder = "WixPerMachineFolder"</Publish>
+			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="FindRelatedProducts" Order="5">1</Publish>
 		</UI>
 		
 	</Product>

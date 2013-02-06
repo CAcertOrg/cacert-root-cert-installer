@@ -330,6 +330,14 @@ function msi_add_language_transforms {
 	Write-Output "Finished embedding the language transforms.`n"
 }
 
+function sign_installer {
+	Write-Output "Signing the installer ..."
+	signtool.exe sign /d "CAcert Root Certificates" /du "http://www.cacert.org" /n "CAcert Release Signing" /t "http://timestamp.verisign.com/scripts/timstamp.dll" ".\build\${out_filename}"
+	if ($LASTEXITCODE -ne 0) {
+		throw "Signing the installer failed (error code: ${LASTEXITCODE}).`nMaybe the signtool.exe is not on the path?"
+	}
+}
+
 
 ##### Script Part #####
 
@@ -340,6 +348,7 @@ l10n_template: generate localisation template (aka *_template.xlf)
 update_l10n:   update the localisation files from the translation server
 quick_build:   only build the english installer
 installer:     build the complete installer
+signature:     sign the installer
 
 Usually you want to use 'update_l10n' first to download the localisation files
 and then use 'installer' to build the final installer"
@@ -372,6 +381,12 @@ switch -regex ($command) {
 		msi_add_language_transforms
 		
 		Write-Output "Finished building the installer."
+	}
+	
+	"signature" {
+		sign_installer
+		
+		Write-Output "Finished signing the installer."
 	}
 	
 	default {

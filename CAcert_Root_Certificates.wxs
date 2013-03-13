@@ -88,6 +88,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			</Component>
 		</ComponentGroup>
 		
+		<!-- Information for "Add/Remove Programs" -->
 		<Icon Id="icon" SourceFile="CAcert-icon-48.ico"/>
 		<Property Id="ARPPRODUCTICON" Value="icon" />
 		<Property Id="ARPCOMMENTS" Value="!(loc.addRemoveProgramsComments)" />
@@ -107,6 +108,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			<Property Id="ApplicationFolderName" Value="CAcert Root Certificates" />
 			<Property Id="WixAppFolder" Value="WixPerUserFolder" />
 			
+			<!-- Explicitly trigger setting the default installation path correctly -->
 			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetDefaultPerUserFolder" Order="4">1</Publish>
 			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetDefaultPerMachineFolder" Order="4">1</Publish>
 			<Publish Dialog="InstallScopeDlg" Control="Next" Event="DoAction" Value="WixSetPerUserFolder" Order="5">WixAppFolder = "WixPerUserFolder"</Publish>
